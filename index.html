@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7faf5" />
+  <meta name="description" content="A rotating collection of dancing internet memes from GreenLeaf Labs." />
+  <title>GreenLeaf Labs — Meme Dance</title>
+
+  <!-- Tailwind CSS v4 browser CDN. For production, compile with the Tailwind CLI. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Geist Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-optical-sizing: auto;
+      background: #f7faf5;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(209, 236, 208, .58), transparent 28rem),
+        radial-gradient(circle at 88% 82%, rgba(255, 230, 210, .48), transparent 26rem),
+        #f7faf5;
+    }
+
+    .hero-grid {
+      background-image: radial-gradient(rgba(33, 107, 69, .12) .8px, transparent .8px);
+      background-size: 21px 21px;
+      mask-image: linear-gradient(to bottom, black, transparent 86%);
+    }
+
+    .mascot-orbit { animation: orbit 18s linear infinite; transform-origin: center; }
+    .dancer {
+      transform-origin: 50% 82%;
+      animation: dance 1.55s ease-in-out infinite;
+      filter: drop-shadow(0 16px 12px rgba(38, 72, 48, .12));
+    }
+    .mascot-enter svg { animation: mascot-enter .42s cubic-bezier(.2,.8,.2,1) both; }
+    .floaty { animation: floaty 3.2s ease-in-out infinite; }
+    .floaty-delay { animation: floaty 3.7s ease-in-out -1.5s infinite; }
+    .sparkle { animation: sparkle 2.2s ease-in-out infinite; transform-origin: center; }
+
+    @keyframes dance {
+      0%, 100% { transform: translateY(0) rotate(-5deg) scale(1); }
+      25% { transform: translateY(-11px) rotate(7deg) scale(1.015); }
+      50% { transform: translateY(0) rotate(-6deg) scale(1); }
+      75% { transform: translateY(-8px) rotate(-9deg) scale(1.01); }
+    }
+    @keyframes mascot-enter {
+      from { opacity: 0; transform: translateY(15px) scale(.94); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-12px) rotate(5deg); }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: .45; transform: scale(.8) rotate(0); }
+      50% { opacity: 1; transform: scale(1.18) rotate(18deg); }
+    }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+
+    .home-button {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      border: 1px solid rgba(255, 255, 255, .95);
+      border-radius: 9999px;
+      padding: .68rem 1rem;
+      color: #24543a;
+      background-color: #f7faf5;
+      font-size: .875rem;
+      font-weight: 800;
+      letter-spacing: -.015em;
+      box-shadow:
+        6px 6px 13px rgba(45, 76, 53, .16),
+        -6px -6px 13px rgba(255, 255, 255, .92),
+        inset 1px 1px 0 rgba(255, 255, 255, .95),
+        inset -1px -1px 0 rgba(94, 129, 101, .08);
+      transition: transform .18s ease, box-shadow .18s ease, color .18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .home-button:hover {
+      color: #123d28;
+      transform: translateY(-2px);
+      box-shadow:
+        8px 8px 16px rgba(45, 76, 53, .17),
+        -7px -7px 15px rgba(255, 255, 255, .96),
+        inset 1px 1px 0 rgba(255, 255, 255, .98);
+    }
+    .home-button:active {
+      transform: translateY(1px);
+      box-shadow:
+        inset 3px 3px 7px rgba(45, 76, 53, .16),
+        inset -3px -3px 7px rgba(255, 255, 255, .95);
+    }
+    @media (min-width: 640px) {
+      .home-button { padding: .76rem 1.2rem; }
+    }
+
+    .focus-ring:focus-visible { outline: 3px solid #7bc69a; outline-offset: 4px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen min-h-dvh overflow-hidden antialiased selection:bg-emerald-200 selection:text-emerald-950">
+  <a
+    href="https://greenleaflabs.cc/"
+    class="focus-ring home-button fixed right-4 top-4 z-50 sm:right-6 sm:top-6"
+    aria-label="Go to GreenLeaf Labs home"
+    title="GreenLeaf Labs home"
+  >
+    <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Home</span>
+  </a>
+  <div class="pointer-events-none fixed inset-0 -z-10 hero-grid opacity-70" aria-hidden="true"></div>
+
+  <main class="relative flex min-h-screen min-h-dvh w-full items-center justify-center px-4 py-6 sm:px-8" aria-label="Dancing meme animation">
+    <section class="relative flex w-full max-w-[32rem] flex-col items-center justify-center" aria-label="Rotating dancing memes">
+      <div class="relative flex aspect-square w-full items-center justify-center">
+        <div class="absolute aspect-square w-[88%] rounded-full bg-gradient-to-br from-[#e7f5e6] via-white to-[#fcebe1] shadow-[inset_0_0_70px_rgba(255,255,255,.9)]" aria-hidden="true"></div>
+        <div class="absolute aspect-square w-[78%] rounded-full border border-dashed border-emerald-800/15" aria-hidden="true"></div>
+        <div class="mascot-orbit absolute aspect-square w-[88%] rounded-full border border-transparent" aria-hidden="true">
+          <span class="absolute left-[12%] top-[17%] size-3 rounded-full bg-amber-300 shadow-[0_0_0_7px_rgba(252,211,77,.13)]"></span>
+          <span class="absolute right-[11%] top-[32%] size-2 rounded-full bg-rose-300 shadow-[0_0_0_7px_rgba(253,164,175,.14)]"></span>
+          <span class="absolute bottom-[12%] left-[25%] size-2.5 rounded-full bg-emerald-300 shadow-[0_0_0_7px_rgba(110,231,183,.13)]"></span>
+        </div>
+
+        <span class="floaty absolute left-[7%] top-[21%] z-20 text-3xl" aria-hidden="true">✦</span>
+        <span class="floaty-delay absolute right-[7%] top-[18%] z-20 text-2xl text-rose-300" aria-hidden="true">♥</span>
+        <span class="sparkle absolute bottom-[17%] right-[12%] z-20 text-3xl text-amber-400" aria-hidden="true">✧</span>
+        <span class="floaty-delay absolute bottom-[19%] left-[10%] z-20 text-xl text-emerald-500" aria-hidden="true">✿</span>
+
+        <div class="relative z-10 flex aspect-[.92] w-[82%] max-w-[380px] flex-col items-center justify-center">
+          <div id="mascot" class="dancer mascot-enter flex h-[75%] w-full items-center justify-center" role="img" aria-label="Doge dancing">
+            <!-- Inline SVG meme artwork is inserted here by the rotation script. -->
+          </div>
+          <div class="mt-1 rounded-full border border-white/80 bg-white/75 px-4 py-2 text-center shadow-md shadow-emerald-900/5 backdrop-blur">
+            <p id="character-name" class="text-sm font-extrabold tracking-tight text-[#183126]" aria-live="polite">Doge</p>
+            <p id="character-caption" class="mt-0.5 text-[10px] font-semibold uppercase tracking-[.17em] text-emerald-700">Much dance. Very vibes.</p>
+          </div>
+        </div>
+
+        <button id="next-character" type="button" class="focus-ring absolute right-0 top-1/2 z-30 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-white bg-white/90 text-lg text-emerald-900 shadow-lg shadow-emerald-900/10 transition hover:scale-105 hover:bg-white" aria-label="Show next dancing meme" title="Next meme">↻</button>
+      </div>
+
+      <div class="-mt-2 flex items-center gap-2 rounded-full border border-white/80 bg-white/75 px-3 py-2 shadow-sm backdrop-blur" aria-label="Meme rotation progress">
+        <span id="progress-dots" class="flex items-center gap-1.5" aria-hidden="true">
+          <span class="size-1.5 rounded-full bg-emerald-700"></span><span class="size-1.5 rounded-full bg-emerald-700/20"></span><span class="size-1.5 rounded-full bg-emerald-700/20"></span><span class="size-1.5 rounded-full bg-emerald-700/20"></span><span class="size-1.5 rounded-full bg-emerald-700/20"></span>
+        </span>
+        <span class="ml-1 text-[10px] font-semibold text-slate-500">New meme every 10s</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const characters = [
+      {
+        name: "Doge",
+        caption: "Much dance. Very vibes.",
+        svg: `<svg viewBox="0 0 260 280" class="h-full max-h-[270px] w-auto max-w-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="130" cy="258" rx="64" ry="8" fill="#65452D" opacity=".12"/>
+          <path d="M92 203 84 239q-2 12 11 13h15q11 0 12-11l4-35M151 204l4 35q1 13 14 13h14q13-1 10-14l-8-40" fill="#F4D4A3" stroke="#684A35" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M77 156q53-23 106 0l7 61q-60 24-120 0z" fill="#D9924F" stroke="#684A35" stroke-width="3"/>
+          <path d="M80 166q-24-5-28 15-2 12 11 15l19-14M180 166q24-5 28 15 2 12-11 15l-19-14" fill="#D9924F" stroke="#684A35" stroke-width="3" stroke-linecap="round"/>
+          <path d="M77 88 59 35q-5-15 10-8l48 35M183 88l18-53q5-15-10-8l-48 35" fill="#D9924F" stroke="#684A35" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M60 107q0-58 70-62 70 4 70 62v30q-6 42-70 47-64-5-70-47z" fill="#D9924F" stroke="#684A35" stroke-width="3"/>
+          <path d="M73 137q10-37 57-39 47 2 57 39-9 34-57 34-48 0-57-34z" fill="#F7E7CE" stroke="#684A35" stroke-width="2.5"/>
+          <path d="M89 113q9-10 21 0M150 113q12-10 21 0" stroke="#49382E" stroke-width="5" stroke-linecap="round"/>
+          <ellipse cx="101" cy="123" rx="5" ry="7" fill="#292725"/><ellipse cx="159" cy="123" rx="5" ry="7" fill="#292725"/>
+          <path d="M120 137q10-9 20 0-1 11-10 12-9-1-10-12z" fill="#49382E"/>
+          <path d="M130 149v7q-9 8-17 0M130 156q9 8 17 0" fill="none" stroke="#684A35" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M88 146q-9-3-13 5M172 146q9-3 13 5" stroke="#E9A0A0" stroke-width="4" stroke-linecap="round"/>
+          <path d="M93 77q18-15 35-10M132 67q18-5 35 10" fill="none" stroke="#F3C48C" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+        </svg>`
+      },
+      {
+        name: "Trollface",
+        caption: "Problem? Not on this dance floor.",
+        svg: `<svg viewBox="0 0 260 280" class="h-full max-h-[270px] w-auto max-w-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="130" cy="258" rx="62" ry="8" fill="#3B3B3B" opacity=".12"/>
+          <path d="M101 190 91 239q-2 12 11 13h13q10 0 12-11l3-44M151 196l7 43q2 12 14 12h13q12-2 9-15l-10-47" fill="#F0F0EF" stroke="#343434" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M79 157q51-23 102 0l9 58q-60 24-120 0z" fill="#343A46" stroke="#24272E" stroke-width="3"/>
+          <path d="M80 164 49 188q-9 8-2 17 7 8 17 1l34-23M180 164l31 24q9 8 2 17-7 8-17 1l-34-23" fill="#F0F0EF" stroke="#343434" stroke-width="3" stroke-linecap="round"/>
+          <path d="M130 166 116 203l14 13 14-13z" fill="#E8E8E8" stroke="#24272E" stroke-width="2"/><path d="m116 203 14 13 14-13-14-9z" fill="#D54C4C"/>
+          <path d="M61 76q-2-37 69-42 71 5 69 42l-8 69q-8 48-61 50-53-2-61-50z" fill="#F7F7F4" stroke="#343434" stroke-width="3"/>
+          <path d="M83 91q20-20 42 2-16 17-42-2zM135 93q21-22 43-2-25 18-43 2z" fill="#343434"/>
+          <path d="M86 111q14-12 30-2M145 109q17-12 30 0" fill="none" stroke="#292929" stroke-width="4" stroke-linecap="round"/>
+          <path d="M76 132q54-22 108 0-8 48-54 49-46-1-54-49z" fill="#343434" stroke="#292929" stroke-width="2"/>
+          <path d="M89 130q41-13 82 0l-5 22q-36 12-72 0z" fill="#fff"/>
+          <path d="M91 134v16M105 131v20M119 129v23M133 129v23M147 131v20M161 134v16" stroke="#D6D6D6" stroke-width="2"/>
+          <path d="M81 119q-8 12-4 26M179 119q8 12 4 26" fill="none" stroke="#343434" stroke-width="4" stroke-linecap="round"/>
+          <path d="M104 67q-15-17-31 0M156 67q15-17 31 0" fill="none" stroke="#D8D8D5" stroke-width="5" stroke-linecap="round"/>
+        </svg>`
+      },
+      {
+        name: "Pepe",
+        caption: "Feels good to move like this.",
+        svg: `<svg viewBox="0 0 260 280" class="h-full max-h-[270px] w-auto max-w-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="130" cy="258" rx="62" ry="8" fill="#315C37" opacity=".13"/>
+          <path d="M95 202 87 240q-2 12 11 12h14q10 0 12-11l3-39M151 202l5 38q1 12 14 12h14q12-1 10-14l-8-39" fill="#62A65C" stroke="#31543A" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M77 158q53-25 106 0l7 59q-60 25-120 0z" fill="#C94F4F" stroke="#31543A" stroke-width="3"/>
+          <path d="M80 167q-24-6-29 15-3 12 10 16l20-14M180 167q24-6 29 15 3 12-10 16l-20-14" fill="#62A65C" stroke="#31543A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M59 102q-5-34 26-49 18-10 39-2 7-18 28-17 23 0 30 19 25 6 20 45l-7 37q-7 43-65 48-58-5-65-48z" fill="#6DBB65" stroke="#31543A" stroke-width="3"/>
+          <path d="M77 91q-2-25 26-27 26 1 27 30l-3 20q-6 15-25 10-22-6-25-33zM132 94q1-29 27-30 28 2 26 29-3 27-25 33-19 5-25-10z" fill="#E7E6A9" stroke="#31543A" stroke-width="3"/>
+          <ellipse cx="107" cy="99" rx="7" ry="10" fill="#fff"/><ellipse cx="154" cy="99" rx="7" ry="10" fill="#fff"/>
+          <ellipse cx="109" cy="102" rx="3.5" ry="6" fill="#252C28"/><ellipse cx="152" cy="102" rx="3.5" ry="6" fill="#252C28"/>
+          <path d="M85 137q18-15 45-5 27-10 45 5-2 28-45 32-43-4-45-32z" fill="#355B3D"/>
+          <path d="M96 139q34-11 68 0-8 16-34 17-26-1-34-17z" fill="#A7D58B"/>
+          <path d="M91 125q-8 10-5 18M169 125q8 10 5 18" fill="none" stroke="#31543A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M107 64q-14-9-25 1M153 65q14-10 25 0" fill="none" stroke="#31543A" stroke-width="5" stroke-linecap="round"/>
+          <path d="m122 177 8 12 8-12" fill="none" stroke="#F4D6D6" stroke-width="3" stroke-linecap="round"/>
+        </svg>`
+      },
+      {
+        name: "Nyan Cat",
+        caption: "Powered by rainbows and snacks.",
+        svg: `<svg viewBox="0 0 300 280" class="h-full max-h-[270px] w-auto max-w-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="155" cy="258" rx="77" ry="8" fill="#5D648D" opacity=".12"/>
+          <path d="M29 89h102v16H29z" fill="#F45C5C"/><path d="M20 105h111v16H20z" fill="#F5A64A"/><path d="M28 121h103v16H28z" fill="#F3D65A"/><path d="M18 137h112v16H18z" fill="#64C77E"/><path d="M32 153h100v16H32z" fill="#5B9DE8"/><path d="M48 169h84v16H48z" fill="#9B77D8"/>
+          <path d="M136 77q-9-16 7-21 14-4 24 11 13-16 28-7 15 8 5 24 23 1 22 22v52q-1 18-20 18h-69q-16 0-18-17V96q0-17 21-19z" fill="#B6B8C8" stroke="#62677D" stroke-width="3"/>
+          <path d="M128 87 119 61q-5-14 9-10l25 24M190 81l10-26q6-14 17-3l-3 36" fill="#B6B8C8" stroke="#62677D" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M112 183 105 225q-2 13 11 13h13q11 0 12-12l2-40M177 184l6 42q2 12 14 12h12q12-2 8-15l-9-42" fill="#B6B8C8" stroke="#62677D" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M132 107q10-9 19 0M177 107q10-9 19 0" stroke="#45475A" stroke-width="4" stroke-linecap="round"/>
+          <ellipse cx="143" cy="119" rx="4" ry="5" fill="#45475A"/><ellipse cx="185" cy="119" rx="4" ry="5" fill="#45475A"/>
+          <path d="M155 135q8 8 16 0" fill="none" stroke="#62677D" stroke-width="3" stroke-linecap="round"/>
+          <path d="M142 126q-8-2-11 4M186 126q8-2 11 4" stroke="#E88E9C" stroke-width="4" stroke-linecap="round"/>
+          <path d="M117 151q-17-14-25 1-6 13 6 19l22-4M205 151q17-14 25 1 6 13-6 19l-22-4" fill="#B6B8C8" stroke="#62677D" stroke-width="3" stroke-linecap="round"/>
+          <path d="M150 76q17 8 40 0v101q-20 12-40 0z" fill="#E9A66F" stroke="#62677D" stroke-width="2.5"/>
+          <path d="M151 101h39M151 126h39M151 151h39" stroke="#F5D2A2" stroke-width="5" opacity=".8"/>
+          <path d="m235 48 4 10 10 4-10 4-4 10-4-10-10-4 10-4zM72 42l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#F2C84B"/>
+        </svg>`
+      },
+      {
+        name: "Dancing Banana",
+        caption: "Peanut butter jelly time!",
+        svg: `<svg viewBox="0 0 260 280" class="h-full max-h-[270px] w-auto max-w-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="130" cy="258" rx="60" ry="8" fill="#8C6A22" opacity=".13"/>
+          <path d="M112 202 103 239q-2 12 11 13h13q11 0 13-12l3-35M150 203l6 36q2 12 14 12h13q12-1 10-14l-8-37" fill="#F2C744" stroke="#8C6A22" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M81 155q51-20 98 0l9 62q-53 24-116 0z" fill="#F5D34E" stroke="#8C6A22" stroke-width="3"/>
+          <path d="M85 166 53 144q-12-8-17 5-4 12 9 17l35 20M176 166l31-22q12-8 17 5 4 12-9 17l-34 20" fill="#F5D34E" stroke="#8C6A22" stroke-width="3" stroke-linecap="round"/>
+          <path d="M131 49q-34 11-55 64-19 47 24 65 48 20 91-18 27-23 13-59-17-43-73-52z" fill="#F7D84B" stroke="#8C6A22" stroke-width="4"/>
+          <path d="M128 49q-10-17 5-22 16-5 19 14" fill="none" stroke="#8C6A22" stroke-width="8" stroke-linecap="round"/>
+          <path d="M76 117q22 12 47 5M83 145q32 13 62 2M112 171q25 8 48-2" fill="none" stroke="#D6A92E" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+          <path d="M90 98q15-17 33-2M143 94q18-15 31 2" fill="none" stroke="#3C3426" stroke-width="5" stroke-linecap="round"/>
+          <rect x="84" y="105" width="42" height="23" rx="8" fill="#242424"/><rect x="139" y="105" width="42" height="23" rx="8" fill="#242424"/><path d="M126 115h13" stroke="#242424" stroke-width="5"/>
+          <path d="M115 143q15 17 31 0" fill="none" stroke="#8C6A22" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M100 223q-9 8-7 19h39q5-10-2-18zM158 225q-2 9 5 17h37q4-11-5-19z" fill="#F4F4F1" stroke="#8C6A22" stroke-width="2.5"/>
+          <path d="M96 236h40M162 237h36" stroke="#D94F4F" stroke-width="4" stroke-linecap="round"/>
+          <path d="m43 68 5 11 11 5-11 5-5 11-5-11-11-5 11-5zM218 65l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#F0B83B"/>
+        </svg>`
+      }
+    ];
+    const mascot = document.getElementById("mascot");
+    const nameLabel = document.getElementById("character-name");
+    const captionLabel = document.getElementById("character-caption");
+    const dots = document.getElementById("progress-dots");
+    const nextButton = document.getElementById("next-character");
+    let activeIndex = 0;
+    let rotationTimer;
+
+    /** Render one meme and update the accessible caption/progress indicator. */
+    function showCharacter(index) {
+      activeIndex = (index + characters.length) % characters.length;
+      const character = characters[activeIndex];
+      mascot.classList.remove("mascot-enter");
+      // Restart the short entrance animation after replacing the mascot SVG.
+      void mascot.offsetWidth;
+      mascot.innerHTML = character.svg;
+      mascot.classList.add("mascot-enter");
+      mascot.setAttribute("aria-label", `${character.name} dancing`);
+      nameLabel.textContent = character.name;
+      captionLabel.textContent = character.caption;
+      dots.innerHTML = characters.map((_, i) =>
+        `<span class="size-1.5 rounded-full ${i === activeIndex ? "bg-emerald-700" : "bg-emerald-700/20"}"></span>`
+      ).join("");
+    }
+
+    /** Start/restart the 10-second automatic meme rotation. */
+    function startRotation() {
+      window.clearInterval(rotationTimer);
+      rotationTimer = window.setInterval(() => showCharacter(activeIndex + 1), 10000);
+    }
+
+    nextButton.addEventListener("click", () => {
+      showCharacter(activeIndex + 1);
+      startRotation();
+    });
+
+    showCharacter(0);
+    startRotation();
+  </script>
+</body>
+</html>
